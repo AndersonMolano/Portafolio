@@ -1,0 +1,58 @@
+<!-- src/main/resources/templates/fragments/footer.html -->
+
+<div th:fragment="footer">
+    <footer class="footer-contact">
+        <div class="footer-content">
+            <!-- Información de contacto -->
+            <section class="contact-info">
+                <div>
+                    <h2>¿Hablemos por privado?</h2>
+                    <p>¡Envíanos un mensaje y te responderemos lo antes posible!</p>
+                </div>
+
+                <div>
+                    <!--
+                    <spline-viewer url="https://prod.spline.design/aY3k4-B0DWyALotH/scene.splinecode"
+                        style="width: 100%; height: 500px; display: block;"></spline-viewer>
+                    -->
+                </div>
+
+                <div class="social-section">
+                    <h3>Síguenos</h3>
+                    <ul class="social-icons">
+                        <li><a href="#"><img src="/img/whatssapp.png" alt="WhatsApp"></a></li>
+                        <li><a href="#"><img src="/img/linkedin.png" alt="LinkedIn"></a></li>
+                        <li><a href="#"><img src="/img/gmail.png" alt="Gmail"></a></li>
+                        <li><a href="#"><img src="/img/github.png" alt="GitHub"></a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Formulario de contacto -->
+            <section class="contact-form-section">
+                <h2>Formulario de contacto</h2>
+                <form class="contact-form">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+
+                    <label for="correo">Correo electrónico</label>
+                    <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com" required>
+
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" placeholder="Tu mensaje..." rows="4" required></textarea>
+
+                    <button name="Enviar" id="Enviar" type="button">Enviar mensaje</button>
+
+                </form>
+            </section>
+        </div>
+
+
+        <!-- Info legal / política -->
+        <section class="footer-info">
+            <p>&copy; 2025 Mi Aplicación. Todos los derechos reservados.</p>
+            <p><a href="/politica-privacidad" style="color: inherit; text-decoration: underline;">Política de
+                    privacidad</a></p>
+        </section>
+    </footer>
+</div>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Robot 3D mejorado</title>
+  <style>
+    body { margin: 0; overflow: hidden; background: #111; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+
+<!-- Three.js -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.min.js"></script>
+
+<script>
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 6;
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  // 💡 Luces
+  const light = new THREE.PointLight(0xffffff, 1.2);
+  light.position.set(5, 5, 5);
+  scene.add(light);
+
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+  scene.add(ambientLight);
+
+  // ===============================
+  // 🧱 PARTES DEL ROBOT
+  // ===============================
+
+  // 🔲 Materiales
+  const headMat = new THREE.MeshStandardMaterial({ color: 0x222222, metalness: 0.8, roughness: 0.3 });
+  const bodyMat = new THREE.MeshStandardMaterial({ color: 0x333333 });
+  const accentMat = new THREE.MeshStandardMaterial({ color: 0xff5c5c, metalness: 0.9 });
+
+  // 🟢 Cabeza
+  const headGeo = new THREE.SphereGeometry(0.7, 32, 32);
+  const head = new THREE.Mesh(headGeo, headMat);
+  head.position.y = 1.8;
+  scene.add(head);
+
+  // 👁️ Ojos
+  const eyeGeo = new THREE.SphereGeometry(0.07, 16, 16);
+  const eyeMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 1 });
+
+  const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
+  leftEye.position.set(-0.25, 1.95, 0.65);
+  const rightEye = new THREE.Mesh(eyeGeo, eyeMat);
+  rightEye.position.set(0.25, 1.95, 0.65);
+  scene.add(leftEye);
+  scene.add(rightEye);
+
+  // 😄 Sonrisa (media luna con un toroide)
+  const smileGeo = new THREE.TorusGeometry(0.2, 0.03, 8, 16, Math.PI);
+  const smileMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff });
+  const smile = new THREE.Mesh(smileGeo, smileMat);
+  smile.rotation.x = Math.PI;
+  smile.position.set(0, 1.75, 0.63);
+  scene.add(smile);
+
+  // 🎧 Orejeras
+  const earGeo = new THREE.CylinderGeometry(0.12, 0.12, 0.2, 32);
+  const leftEar = new THREE.Mesh(earGeo, accentMat);
+  const rightEar = new THREE.Mesh(earGeo, accentMat);
+  leftEar.rotation.z = Math.PI / 2;
+  rightEar.rotation.z = Math.PI / 2;
+  leftEar.position.set(-0.7, 1.8, 0);
+  rightEar.position.set(0.7, 1.8, 0);
+  scene.add(leftEar, rightEar);
+
+  // 🔵 Cuerpo
+  const bodyGeo = new THREE.CylinderGeometry(0.7, 0.5, 1.5, 32);
+  const body = new THREE.Mesh(bodyGeo, bodyMat);
+  body.position.y = 0.4;
+  scene.add(body);
+
+  // 🟠 Brazos
+  const armGeo = new THREE.CylinderGeometry(0.15, 0.15, 1, 32);
+  const armMat = new THREE.MeshStandardMaterial({ color: 0x444444 });
+
+  const leftArm = new THREE.Mesh(armGeo, armMat);
+  leftArm.rotation.z = Math.PI / 4;
+  leftArm.position.set(-1.0, 1, 0);
+  scene.add(leftArm);
+
+  const rightArm = new THREE.Mesh(armGeo, armMat);
+  rightArm.position.set(1.0, 1, 0);
+  scene.add(rightArm);
+
+  // ===============================
+  // 🧠 INTERACCIÓN MOUSE
+  // ===============================
+
+  const mouse = new THREE.Vector2();
+  const raycaster = new THREE.Raycaster();
+  const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), -4); // plano a z=4
+  const targetPoint = new THREE.Vector3();
+
+  window.addEventListener("mousemove", (event) => {
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  });
+
+  // ===============================
+  // 🌀 ANIMACIÓN
+  // ===============================
+
+  let clock = new THREE.Clock();
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    raycaster.setFromCamera(mouse, camera);
+    raycaster.ray.intersectPlane(plane, targetPoint);
+
+    // Suaviza el seguimiento con lerp
+    const currentLook = new THREE.Vector3();
+    head.getWorldPosition(currentLook);
+    const direction = targetPoint.clone().sub(currentLook).normalize();
+    const newLookAt = currentLook.clone().add(direction);
+    head.lookAt(newLookAt);
+
+    // Brazo derecho saluda con onda seno
+    const t = clock.getElapsedTime();
+    rightArm.rotation.z = Math.sin(t * 2) * 0.4;
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+  // Responsivo
+  window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+</script>
+</body>
+</html>

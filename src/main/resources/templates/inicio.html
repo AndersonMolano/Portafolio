@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Página de Inicio</title>
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.71/build/spline-viewer.js"></script>
+
+</head>
+<body>
+
+    <!-- Incluir navbar -->
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <h1>Bienvenido a Mi Aplicación</h1>
+    <p>Página de inicio básica.</p>
+
+    <!-- Incluir footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+    <script src="/js/footer.js"></script>
+
+</body>
+</html>
