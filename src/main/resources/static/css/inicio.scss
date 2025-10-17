@@ -1,0 +1,33 @@
+$custom-colors: (
+    "morado" : #6a11cb
+);
+
+$background: (
+    "fondo-morado" : linear-gradient(135deg, #4b0082 70%, #2e0854 100%)
+);
+
+$color-morado: map-get($custom-colors, "morado");
+$background: map-get($background, "fondo-morado");
+
+
+body, html {
+    background: $background;
+    overflow-y: hidden;
+    height: 100vh; /* Altura de la ventana */
+    margin: 0;
+}
+
+h1 {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    margin-top: 20px;
+}
+.btn-morado {
+  background-color: $color-morado;
+  color: white;
+
+  &:hover {
+    background-color: darken($color-morado, 10%);
+  }
+}

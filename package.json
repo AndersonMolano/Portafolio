@@ -1,0 +1,24 @@
+{
+  "name": "miapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass src/main/resources/static/css/inicio.scss src/main/resources/static/css/inicio.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndersonMolano/Portafolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndersonMolano/Portafolio/issues"
+  },
+  "homepage": "https://github.com/AndersonMolano/Portafolio#readme",
+  "devDependencies": {
+    "sass": "^1.93.2"
+  }
+}

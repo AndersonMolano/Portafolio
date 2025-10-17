@@ -11,8 +11,4 @@ public class HomeController {
         return "inicio"; 
     }
 
-    @GetMapping("/animacion")
-    public String animacion() {
-        return "animacion"; 
-    }
 }

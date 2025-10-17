@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Página de Inicio</title>
@@ -7,19 +8,48 @@
     <link rel="stylesheet" href="/css/navbar.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.71/build/spline-viewer.js"></script>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/inicio.css">
+    <!-- mvn spring-boot:run-->
 </head>
-<body>
 
+<body>
     <!-- Incluir navbar -->
     <div th:replace="~{fragments/navbar :: navbar}"></div>
-
-    <h1>Bienvenido a Mi Aplicación</h1>
-    <p>Página de inicio básica.</p>
+    <h1>Modulos Diseñados</h1>
+    <div class="d-flex justify-content-center">
+        <div class="card custom-font me-3" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Number Guessing Game</h5>
+                <p class="card-text">Build a simple number guessing game to test your luck.</p>
+                <button id="Empezar-juego" class="btn btn-morado">Prueba</button>
+            </div>
+        </div>
+        <div class="card custom-font me-3" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Number Guessing Game</h5>
+                <p class="card-text">Build a simple number guessing game to test your luck.</p>
+                <a href="#" class="btn btn-morado">Next</a>
+            </div>
+        </div>
+        <div class="card custom-font" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Number Guessing Game</h5>
+                <p class="card-text">Build a simple number guessing game to test your luck.</p>
+                <a href="#" class="btn btn-morado">Next</a>
+            </div>
+        </div>
+    </div>
 
     <!-- Incluir footer -->
     <div th:replace="~{fragments/footer :: footer}"></div>
     <script src="/js/footer.js"></script>
+    <script src="/js/inicio.js"></script>
 
 </body>
+
 </html>
